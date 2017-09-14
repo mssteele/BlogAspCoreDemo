@@ -1,0 +1,22 @@
+﻿@model Blog.Features.BlogEntry.Details.Model
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/prism.css" />
+}
+
+<h1 class="jumbotron">@Model.Title</h1>
+
+<p>
+    @Html.Raw(Markdig.Markdown.ToHtml(Model.Content))
+</p>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary" role="button">Update</a>
+
+@section Scripts
+{
+    <script src="~/js/prism.js"></script>
+}

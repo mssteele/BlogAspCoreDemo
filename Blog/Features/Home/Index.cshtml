@@ -1,8 +1,31 @@
-﻿@{
+﻿@model Blog.Features.Home.IndexModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<div class="row">
+    <div class="col-md-6">
+        <h2>Blog Posts:</h2>
+        <ul>
+            @foreach(var entry in Model.Entries)
+            {
+                <li>
+                    <a asp-controller="BlogEntry" asp-action="Details" asp-route-id="@entry.Id">@entry.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Actions</h2>
+        <ul>
+            <li>
+                <a asp-controller="BlogEntry" asp-action="Create">Create new blog entry</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -98,11 +121,11 @@
         </ul>
     </div>
     <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
+        <h2>Run & Deploy</h2>
         <ul>
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
         </ul>
     </div>
-</div>
+</div>*@

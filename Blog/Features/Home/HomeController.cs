@@ -1,18 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Blog.Models;
+using Core;
 
-namespace Blog.Controllers
+namespace Blog.Features.Home
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IBlogEntryRepository _blogRepository;
+
+        public HomeController(IBlogEntryRepository blogRepo)
         {
-            return View();
+            _blogRepository = blogRepo;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var blogEntries = await _blogRepository.GetAllEntries();
+
+            var viewModel = new IndexModel();
+            viewModel.Entries = blogEntries.Select(e => new EntryItem { Id = e.Id, Title = e.Title });
+
+            return View(viewModel);
         }
 
         public IActionResult About()
@@ -31,7 +42,7 @@ namespace Blog.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }
