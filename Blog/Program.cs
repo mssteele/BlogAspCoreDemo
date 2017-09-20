@@ -17,10 +17,13 @@ namespace Blog
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .UseAzureAppServices() // ASP.NET Core does not by default feed logs to Azure App Service - https://shellmonger.com/2017/02/16/running-asp-net-core-applications-in-azure-app-service/
                 .UseApplicationInsights()
                 .UseStartup<Startup>()
                 .Build();
+        }
     }
 }
