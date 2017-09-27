@@ -27,7 +27,8 @@ namespace Blog
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.ApplicationInsightsTraces(Configuration.GetSection("ApplicationInsights:InstrumentationKey").Value)
+                //.WriteTo.ApplicationInsightsTraces(Configuration.GetSection("ApplicationInsights:InstrumentationKey").Value)
+                .WriteTo.ApplicationInsightsEvents(Configuration.GetSection("ApplicationInsights:InstrumentationKey").Value)
                 .CreateLogger();
         }
 
